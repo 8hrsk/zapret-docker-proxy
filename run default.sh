@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Директория с конфигурационными файлами
-CONFIG_DIR="./configs/zapret.configs"
+CONFIG_DIR="./configs"
 # Имя целевого файла конфигурации
 TARGET_CONFIG="./config"
 # Имя директории, которую нужно игнорировать
@@ -13,12 +13,12 @@ if [ ! -d "$CONFIG_DIR" ]; then
   exit 1
 fi
 
-# Получение списка конфигурационных файлов, исключая директорию bin
-CONFIG_FILES=($(find "$CONFIG_DIR" -maxdepth 1 -type f -not -name "$IGNORE_DIR/*" -exec basename {} \;))
+# Получение списка конфигурационных файлов, исключая директорию bin и файлы .txt
+CONFIG_FILES=($(find "$CONFIG_DIR" -maxdepth 1 -type f -not -name "*.txt" -not -path "$CONFIG_DIR/$IGNORE_DIR/*" -exec basename {} \;))
 
 # Проверка наличия конфигурационных файлов
 if [ ${#CONFIG_FILES[@]} -eq 0 ]; then
-  echo "Ошибка: В директории $CONFIG_DIR нет конфигурационных файлов."
+  echo "Ошибка: В директории $CONFIG_DIR нет доступных конфигурационных файлов."
   exit 1
 fi
 
@@ -50,9 +50,13 @@ else
   exit 1
 fi
 
+if docker ps | grep -q "zapret-proxy"; then
+  echo "Контейнер уже запущен. Остановка контейнера..."
+  docker kill zapret-proxy
+fi
+
 # Запуск контейнера
 echo "Запуск контейнера..."
-
 docker-compose build
 docker-compose up -d
 
