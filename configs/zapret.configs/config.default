@@ -42,10 +42,10 @@ NFQWS_TCP_PKT_IN=3
 NFQWS_UDP_PKT_OUT=9
 NFQWS_UDP_PKT_IN=0
 NFQWS_OPT="
---filter-udp=443 --hostlist="configs/list-general.txt" --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic="configs/bin/quic_initial_www_google_com.bin" --new
---filter-udp=50000-50100 --ipset="configs/ipset-discord.txt" --dpi-desync=fake --dpi-desync-any-protocol --dpi-desync-cutoff=d3 --dpi-desync-repeats=6 --new
---filter-tcp=80 --hostlist="configs/list-general.txt" --dpi-desync=fake,split2 --dpi-desync-autottl=2 --dpi-desync-fooling=md5sig --new
---filter-tcp=443 --hostlist="configs/list-general.txt" --dpi-desync=fake,split --dpi-desync-autottl=2 --dpi-desync-repeats=6 --dpi-desync-fooling=badseq --dpi-desync-fake-tls="configs/bin/tls_clienthello_www_google_com.bin
+--filter-udp=443 --hostlist=/opt/zapret/configs/list-general.txt --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic=/opt/zapret/files/fake/quic_initial_www_google_com.bin
+--filter-udp=50000-50100 --ipset=/opt/zapret/configs/ipset-discord.txt --dpi-desync=fake --dpi-desync-any-protocol --dpi-desync-cutoff=d3 --dpi-desync-repeats=6
+--filter-tcp=80 --hostlist=/opt/zapret/configs/list-general.txt --dpi-desync=fake,split2 --dpi-desync-autottl=2 --dpi-desync-fooling=md5sig
+--filter-tcp=443 --hostlist=/opt/zapret/configs/list-general.txt --dpi-desync=fake,split --dpi-desync-autottl=2 --dpi-desync-repeats=6 --dpi-desync-fooling=badseq --dpi-desync-fake-tls=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
 "
 
 MODE_FILTER=none
