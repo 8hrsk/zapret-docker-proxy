@@ -35,15 +35,11 @@ COPY zapret /opt/zapret
 
 WORKDIR /opt/zapret
 
-
-# RUN mkdir -p /opt/zapret/configuration
-
-# RUN touch /opt/zapret/configuration/blockcheck_summary.txt && \
-#     touch /opt/zapret/configuration/blockcheck.log
+ADD configs/zapret.configs /opt/zapret/configs
 
 COPY configs/dnscrypt-proxy.toml /etc/dnscrypt-proxy/dnscrypt-proxy.toml
 COPY configs/resolv.conf /etc/resolv.conf
-COPY configs/tinyproxy.conf /etc/tinyproxy/tinyproxy.conf
+# COPY configs/tinyproxy.conf /etc/tinyproxy/tinyproxy.conf
 COPY configs/squid.conf /etc/squid/squid.conf
 
 COPY scripts/enable_services.sh /opt/zapret/enable_services.sh
