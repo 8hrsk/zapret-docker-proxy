@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Директория с конфигурационными файлами
-CONFIG_DIR="./configs"
+CONFIG_DIR="./configs/zapret.configs"
 # Имя целевого файла конфигурации
 TARGET_CONFIG="./config"
 # Имя директории, которую нужно игнорировать
