@@ -8,7 +8,7 @@ systemctl enable dnscrypt-proxy.service
 systemctl start dnscrypt-proxy.service
 systemctl enable systemd-resolved.service
 systemctl start systemd-resolved.service
-systemctl restart squid
+# systemctl restart squid
 
 echo "services enabled and started"
 
