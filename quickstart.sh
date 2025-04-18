@@ -7,18 +7,26 @@ DNSCRYPT_ARCH="x86_64"
 # Remove old zapret directory if exists
 if [ -d "./zapret" ]; then rm -Rf ./zapret; fi
 
-# Download zapret
-download_url=$(curl -s https://api.github.com/repos/bol-van/zapret/releases/latest | grep -oP '"browser_download_url": "\K.*?\.tar\.gz(?=")' | grep -v "openwrt")
+# REMAKE быстрый фикс для 50 discord
+# Скачивание zapret версии v70.5
+version="v70.5"
+download_url=$(curl -s "https://api.github.com/repos/bol-van/zapret/releases/tags/$version" | grep -oP '"browser_download_url": "\K.*?\.tar\.gz(?=")' | grep -v "openwrt")
+
 if [ -z "$download_url" ]; then
-    echo "Error: Unable to find .tar.gz asset in the latest release of zapret"
+    echo "Error: Не удалось найти .tar.gz архив для версии $version"
+    echo "Проверьте, что версия $version существует на странице релизов: https://github.com/bol-van/zapret/releases"
     exit 1
 fi
+
 filename=$(basename "$download_url")
-echo "Downloading $download_url"
+echo "Скачивается $download_url"
 wget "$download_url"
+
 if ! tar -xvzf "$filename"; then
     tar xvzf "$filename"
 fi
+
+# REMAKE быстрый фикс 50 discord
 
 # Extract it
 rm "$filename"
