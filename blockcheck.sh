@@ -7,7 +7,7 @@
 docker-compose up --build -d
 
 # Wait for the container to be ready
-until docker exec zapret-proxy echo "Container is ready"; do
+until docker ps | grep -q "zapret-proxy"; do
   echo "Waiting for container to start..."
   sleep 2
 done
